@@ -6,9 +6,6 @@ resource "aws_s3_bucket" "gary" {
     Environment = "Dev"
   }
 
-  versioning {
-    enabled = true
-  }
 }
 
 resource "aws_s3_bucket_ownership_controls" "gary" {
@@ -35,4 +32,12 @@ resource "aws_s3_bucket_acl" "gary" {
 
   bucket = aws_s3_bucket.gary.id
   acl    = "public-read"
+}
+
+resource "aws_s3_bucket_versioning" "gary" {
+  bucket = aws_s3_bucket.gary.id
+
+  versioning_configuration {
+    status = "Enabled"
+  }
 }
